@@ -1,7 +1,6 @@
-package test;
+package Lab2.testParserLab2;
 
-import parser.Parser;
-import parser.Tree;
+import Lab2.parserLab2.Parser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ public class Tests {
         trueTests.add("((abc*b|a)*ab(aa|b*)b)*");
         trueTests.add("(a)");
         trueTests.add("test");
+        trueTests.add("testsafdgsfdsafdgsfdfsagadsa");
         trueTests.add("adsf|ds");
         trueTests.add("a*");
         trueTests.add("(dfd)*|d");
@@ -68,7 +68,7 @@ public class Tests {
         for (int i = 100; i < size; i++) {
             String test = randomTest.randomRegEx(i);
             try {
-                Tree ans = parser.parse(test);
+                parser.parse(test);
             } catch (IOException e) {
                 throw new IOException("WRONG ANSWER at test: " + test);
             }
@@ -79,7 +79,7 @@ public class Tests {
         for (String test : trueTests) {
             System.err.println("Running test: " + test);
             try {
-                Tree ans = parser.parse(test);
+                parser.parse(test);
             } catch (IOException e) {
                 throw new IOException("WRONG ANSWER at test: " + test);
             }
@@ -90,10 +90,11 @@ public class Tests {
         for (String test : falseTests) {
             System.err.println("Running test: " + test);
             try {
-                Tree ans = parser.parse(test);
-                throw new IOException("WRONG ANSWER at test: " + test);
+                parser.parse(test);
             } catch (IOException ignored) {
+                continue;
             }
+            throw new IOException("WRONG ANSWER at test: " + test);
         }
     }
 }

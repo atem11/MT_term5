@@ -1,4 +1,4 @@
-package parser;
+package Lab2.parserLab2;
 
 import java.io.IOException;
 

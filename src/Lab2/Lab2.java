@@ -1,8 +1,9 @@
-import parser.Lexer;
-import parser.Parser;
-import parser.TokenStream;
-import parser.Tree;
-import test.RandomTest;
+package Lab2;
+
+import Lab2.parserLab2.Lexer;
+import Lab2.parserLab2.Parser;
+import Lab2.parserLab2.TokenStream;
+import Lab2.parserLab2.Tree;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.nio.file.Paths;
 
 public class Lab2 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         //*
         Path pathToInputFile = Paths.get("test.txt");
         try (BufferedReader reader = Files.newBufferedReader(pathToInputFile)) {

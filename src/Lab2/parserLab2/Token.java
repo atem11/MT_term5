@@ -1,4 +1,4 @@
-package parser;
+package Lab2.parserLab2;
 
 import java.io.IOException;
 
@@ -42,11 +42,11 @@ class Token {
         }
     }
 
-    public tokens get() {
+    tokens get() {
         return token;
     }
 
-    public String getName() {
+    String getName() {
         return name.toString();
     }
 

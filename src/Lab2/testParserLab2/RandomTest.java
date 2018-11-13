@@ -1,4 +1,4 @@
-package test;
+package Lab2.testParserLab2;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ public class RandomTest {
     private int size = 0;
     private Random random = new Random();
 
-    public String randomRegEx(int size) {
+    String randomRegEx(int size) {
         this.size = size;
         return randomS();
     }

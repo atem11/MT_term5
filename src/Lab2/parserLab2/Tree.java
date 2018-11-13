@@ -1,4 +1,4 @@
-package parser;
+package Lab2.parserLab2;
 
 import guru.nidi.graphviz.attribute.Color;
 import guru.nidi.graphviz.engine.Format;
@@ -29,16 +29,16 @@ public class Tree {
         return ans;
     }
 
-    public Tree(String node) {
+    Tree(String node) {
         this.node = node;
     }
 
-    public Tree(String node, boolean term) {
+    Tree(String node, boolean term) {
         this.node = node;
         this.term = term;
     }
 
-    public void addChildren(Tree son) {
+    void addChildren(Tree son) {
         children.add(son);
     }
 
@@ -72,7 +72,7 @@ public class Tree {
         }
     }
 
-    public boolean equals(Tree other) {
+    /*boolean equals(Tree other) {
         if (!this.node.equals(other.node)) {
             return false;
         } else {
@@ -87,7 +87,7 @@ public class Tree {
             }
         }
         return true;
-    }
+    }*/
 
     private MutableNode node() {
         MutableNode root = mutNode(String.valueOf(anyRand()));

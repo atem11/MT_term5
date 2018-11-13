@@ -1,4 +1,4 @@
-package parser;
+package Lab2.parserLab2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ public class TokenStream {
         index = 0;
     }
 
-    public Token next() {
+    Token next() {
         return operations.get(index++);
     }
 
-    public Token get() {
+    Token get() {
         return operations.get(index);
     }
 
