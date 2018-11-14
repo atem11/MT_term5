@@ -46,6 +46,11 @@ public class Tests {
         falseTests.add("f*()|sd");
         falseTests.add(")()())(()(");
         falseTests.add("|*");
+        falseTests.add("14432");
+        falseTests.add("sfLsf");
+        falseTests.add("134DSF");
+        falseTests.add("(D)|d*");
+        falseTests.add("(!)|@");
     }
 
     public static void main(String[] args) {

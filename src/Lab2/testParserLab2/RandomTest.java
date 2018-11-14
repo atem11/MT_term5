@@ -45,13 +45,13 @@ public class RandomTest {
     private String randomRE() {
         if (size > 0 && size < 3) {
             size--;
-            return "L";
+            return "t";
         } else {
             int choose = random.nextInt(BORDER);
             String ans = "";
             if (choose > 1) {
                 size--;
-                ans += "L";
+                ans += "t";
             } else {
                 size -= 2;
                 ans += "(";

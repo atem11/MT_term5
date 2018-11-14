@@ -35,10 +35,15 @@ class Token {
                 token = tokens.END;
                 break;
             default:
-                if (!Character.isAlphabetic(name)) {
+                if (((((1 << Character.LOWERCASE_LETTER) >> Character.getType(name)) & 1) != 0)) {
+                    token = tokens.SYMBOL;
+                } else {
                     throw new IOException("Wrong symbol: " + name);
                 }
-                token = tokens.SYMBOL;
+                /*if (!Character.isAlphabetic(name)) {
+                    throw new IOException("Wrong symbol: " + name);
+                }
+                token = tokens.SYMBOL;*/
         }
     }
 

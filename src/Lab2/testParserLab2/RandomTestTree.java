@@ -66,12 +66,12 @@ public class RandomTestTree {
         Tree tree = new Tree("RE");
         if (size > 0 && size < 3) {
             size--;
-            tree.addChildren(new Tree("L", true));
+            tree.addChildren(new Tree("t", true));
         } else {
             int choose = random.nextInt(BORDER);
             if (choose > BORDER / 3) {
                 size--;
-                tree.addChildren(new Tree("L", true));
+                tree.addChildren(new Tree("t", true));
             } else {
                 size -= 2;
                 tree.addChildren(new Tree("(", true));
