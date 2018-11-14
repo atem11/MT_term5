@@ -29,16 +29,16 @@ public class Tree {
         return ans;
     }
 
-    Tree(String node) {
+    public Tree(String node) {
         this.node = node;
     }
 
-    Tree(String node, boolean term) {
+    public Tree(String node, boolean term) {
         this.node = node;
         this.term = term;
     }
 
-    void addChildren(Tree son) {
+     public void addChildren(Tree son) {
         children.add(son);
     }
 
@@ -72,7 +72,23 @@ public class Tree {
         }
     }
 
-    /*boolean equals(Tree other) {
+    public String makeString() {
+        if (term) {
+            if (node.equals("Eps")) {
+                return "";
+            } else {
+                return node;
+            }
+        } else {
+            StringBuilder ans = new StringBuilder();
+            for (Tree t : children) {
+                ans.append(t.makeString());
+            }
+            return ans.toString();
+        }
+    }
+
+    public boolean equals(Tree other) {
         if (!this.node.equals(other.node)) {
             return false;
         } else {
@@ -87,7 +103,7 @@ public class Tree {
             }
         }
         return true;
-    }*/
+    }
 
     private MutableNode node() {
         MutableNode root = mutNode(String.valueOf(anyRand()));

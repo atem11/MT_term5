@@ -63,7 +63,7 @@ public class RandomTest {
     }
 
     private String randomKlini() {
-        int choose = random.nextInt(6);
+        int choose = random.nextInt(BORDER);
         if (choose < 2) {
             size--;
             return "*";
@@ -74,7 +74,7 @@ public class RandomTest {
 
     private String randomNext() {
         if (size > 0) {
-            int choose = random.nextInt(7);
+            int choose = random.nextInt(BORDER);
             if (choose > 2) {
                 return randomNreh();
             } else {

@@ -1,6 +1,7 @@
 package Lab2.testParserLab2;
 
 import Lab2.parserLab2.Parser;
+import Lab2.parserLab2.Tree;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class Tests {
 
     static {
         falseTests.add("");
+        falseTests.add("     \n");
+        falseTests.add("     ");
         falseTests.add("()");
         falseTests.add("()|()");
         falseTests.add("a()");
@@ -51,10 +54,12 @@ public class Tests {
             System.err.println("----------------------");
             simpleTestsTrue();
             simpleTestsFalse();
-            System.err.println("Running random tests");
+            System.err.println("Running random tests String");
             System.err.println("----------------------");
-            randomTest(1000);
+            randomTestString(1000);
+            System.err.println("Running random tests Tree");
             System.err.println("----------------------");
+            randomTestTree(100);
             System.err.println("COMPLETE");
         } catch (IOException e) {
             System.err.println("----------------------");
@@ -63,7 +68,23 @@ public class Tests {
         }
     }
 
-    private static void randomTest(int size) throws IOException {
+    private static void randomTestTree(int size) throws IOException {
+        RandomTestTree randomTestTree = new RandomTestTree();
+        for (int i = 10; i < size; i++) {
+            Tree testTree = randomTestTree.randomTree(i);
+            String test = testTree.makeString();
+            try {
+                Tree ansTree = parser.parse(test);
+                if (!testTree.equals(ansTree)) {
+                    throw new IOException();
+                }
+            } catch (IOException e) {
+                throw new IOException("WRONG ANSWER at test: " + test);
+            }
+        }
+    }
+
+    private static void randomTestString(int size) throws IOException {
         RandomTest randomTest = new RandomTest();
         for (int i = 100; i < size; i++) {
             String test = randomTest.randomRegEx(i);
@@ -77,7 +98,7 @@ public class Tests {
 
     private static void simpleTestsTrue() throws IOException {
         for (String test : trueTests) {
-            System.err.println("Running test: " + test);
+            System.err.println("Running OK test: " + test);
             try {
                 parser.parse(test);
             } catch (IOException e) {
@@ -88,7 +109,7 @@ public class Tests {
 
     private static void simpleTestsFalse() throws IOException {
         for (String test : falseTests) {
-            System.err.println("Running test: " + test);
+            System.err.println("Running WA test: " + test);
             try {
                 parser.parse(test);
             } catch (IOException ignored) {
