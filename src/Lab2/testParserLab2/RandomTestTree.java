@@ -89,7 +89,11 @@ public class RandomTestTree {
             size--;
             tree.addChildren(new Tree("*", true));
         } else {
-            tree.addChildren(new Tree("Eps", true));
+            if (choose < BORDER / 3 * 2) {
+                tree.addChildren(new Tree("?", true));
+            } else {
+                tree.addChildren(new Tree("Eps", true));
+            }
         }
         return tree;
     }

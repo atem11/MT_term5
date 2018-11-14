@@ -10,6 +10,7 @@ class Token {
         RPAREN,     /* ) */
         KLINI,      /* * */
         OR,         /* | */
+        QUEST,      /* ? */
         END         /* End of regular expression */
     }
 
@@ -27,6 +28,9 @@ class Token {
                 break;
             case '*':
                 token = tokens.KLINI;
+                break;
+            case '?':
+                token = tokens.QUEST;
                 break;
             case '|':
                 token = tokens.OR;

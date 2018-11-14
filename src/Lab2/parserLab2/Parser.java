@@ -136,6 +136,10 @@ public class Parser {
                 stream.next();
                 tree.addChildren(new Tree(token.getName(), true));
                 break;
+            case QUEST:
+                stream.next();
+                tree.addChildren(new Tree(token.getName(), true));
+                break;
             default:
                 tree.addChildren(new Tree("Eps", true));
         }

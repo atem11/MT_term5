@@ -11,7 +11,7 @@ public class RandomTest {
         this.size = size;
         return randomS();
     }
-    
+
     private String randomS() {
         String Nre = randomNre();
         String Nend = randomNend();
@@ -68,6 +68,9 @@ public class RandomTest {
             size--;
             return "*";
         } else {
+            if (choose < BORDER / 3 * 2) {
+                return "?";
+            }
             return "";
         }
     }
@@ -80,7 +83,7 @@ public class RandomTest {
             } else {
                 return "";
             }
-            
+
         } else {
             return "";
         }

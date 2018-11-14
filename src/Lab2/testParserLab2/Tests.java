@@ -29,6 +29,9 @@ public class Tests {
         trueTests.add("(dg*dg)|(d)*(dg)|x*");
         trueTests.add("df|sdf(sdf)");
         trueTests.add("((fg)*sdf)*|((df)|(sd*d))");
+        trueTests.add("(a)?");
+        trueTests.add("a?");
+        trueTests.add("ab?");
     }
 
     static {
@@ -51,6 +54,12 @@ public class Tests {
         falseTests.add("134DSF");
         falseTests.add("(D)|d*");
         falseTests.add("(!)|@");
+        falseTests.add("?");
+        falseTests.add("*");
+        falseTests.add("a?*");
+        falseTests.add("a*?");
+        falseTests.add("(a)?*");
+        falseTests.add("(a)*?");
     }
 
     public static void main(String[] args) {
