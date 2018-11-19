@@ -15,7 +15,7 @@ public class Lab2 {
 
     public static void main(String[] args) {
         //*
-        Path pathToInputFile = Paths.get("test.txt");
+        Path pathToInputFile = Paths.get(".\\src\\Lab2\\test.txt");
         try (BufferedReader reader = Files.newBufferedReader(pathToInputFile)) {
             StringBuilder allLines = new StringBuilder();
             String line;
@@ -27,7 +27,7 @@ public class Lab2 {
             Parser parser = new Parser();
             Tree tree = parser.parse(allLines.toString());
            // System.out.println(tree.toString());
-            tree.printGraph("Tree.png");
+            tree.printGraph(".\\src\\Lab2\\Tree.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
