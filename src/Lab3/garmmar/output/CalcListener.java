@@ -52,6 +52,16 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitMultExpression(CalcParser.MultExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CalcParser#atomMinus}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtomMinus(CalcParser.AtomMinusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalcParser#atomMinus}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtomMinus(CalcParser.AtomMinusContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CalcParser#atom}.
 	 * @param ctx the parse tree
 	 */

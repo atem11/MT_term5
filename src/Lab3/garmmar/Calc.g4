@@ -52,18 +52,28 @@ expr returns[int value]
 	;
 	
 multExpression returns[int value]
-	: resultFirst = atom {
+	: resultFirst = atomMinus {
                 $value = $resultFirst.value;
             }
-	('*' resultFollow = atom {
+	('*' resultFollow = atomMinus {
                 $value *= $resultFollow.value;
             }
-	| '/' resultFollow = atom {
+	| '/' resultFollow = atomMinus {
                 $value /= $resultFollow.value;
             }
 	)*
 	;
-	
+
+
+atomMinus returns[int value]
+    : result = atom {
+        $value = $result.value;
+    }
+    | '-' result = atom {
+        $value = -$result.value;
+    }
+    ;
+
 atom returns[int value]
 	: ID {
 	    try {
