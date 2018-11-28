@@ -1,8 +1,8 @@
 // Generated from Calc.g4 by ANTLR 4.7.1
 
-    package Lab3.garmmar.output;
-    import java.util.HashMap;
-    import java.util.Map;
+package Lab3.garmmar.output;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -76,7 +76,7 @@ public class CalcLexer extends Lexer {
 	}
 
 
-	    Map<String, Integer> values = new HashMap<>();
+	Map<String, Integer> values = new HashMap<>();
 
 
 	public CalcLexer(CharStream input) {

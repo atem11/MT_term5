@@ -4,13 +4,13 @@ options {
 }
 
 @header {
-    package Lab3.garmmar.output;
-    import java.util.HashMap;
-    import java.util.Map;
+package Lab3.garmmar.output;
+import java.util.HashMap;
+import java.util.Map;
 }
 
 @members {
-    Map<String, Integer> values = new HashMap<>();
+Map<String, Integer> values = new HashMap<>();
 }
 
 ID

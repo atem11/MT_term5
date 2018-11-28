@@ -1,8 +1,8 @@
 // Generated from Calc.g4 by ANTLR 4.7.1
 
-    package Lab3.garmmar.output;
-    import java.util.HashMap;
-    import java.util.Map;
+package Lab3.garmmar.output;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -82,7 +82,7 @@ public class CalcParser extends Parser {
 	public ATN getATN() { return _ATN; }
 
 
-	    Map<String, Integer> values = new HashMap<>();
+	Map<String, Integer> values = new HashMap<>();
 
 	public CalcParser(TokenStream input) {
 		super(input);
