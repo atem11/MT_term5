@@ -20,15 +20,15 @@ public class LexerGenerator extends ClassGenerator {
     @Override
     void printClass() {
         printName();
-        printMebers();
+        printMembers();
         printCodeLine(0, "}");
     }
 
-    void printName() {
+    private void printName() {
         printCodeLine(0, "public class Lexer" + grammar.name(), "{", EOL);
     }
 
-    void printMebers() {
+    void printMembers() {
         if (grammar.WS() != null) {
             printCodeLine(1, "private Pattern WS = Pattern.compile(", grammar.WS(), ");");
         }

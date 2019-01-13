@@ -17,7 +17,7 @@ public class TokenGenerator extends ClassGenerator {
     @Override
     void printClass() {
         printName();
-        printMebers();
+        printMembers();
         printCodeLine(0, "}");
     }
 
@@ -25,7 +25,7 @@ public class TokenGenerator extends ClassGenerator {
         printCodeLine(0, "public enum Token" + grammar.name(), "{");
     }
 
-    private void printMebers() {
+    private void printMembers() {
         for (Term term : grammar.terms()) {
             printCodeLine(1, term.name(), ",");
         }

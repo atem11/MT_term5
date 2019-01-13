@@ -14,6 +14,7 @@ public class NonTerm implements ObjTerm {
     private List<Argument> args;
     private List<Argument> ret_args;
     private List<String> parameters = new ArrayList<>();
+    private Boolean canBeEps = false;
 
     private Set<Term> first = new HashSet<>();
     private Set<Term> follow = new HashSet<>();
@@ -40,6 +41,10 @@ public class NonTerm implements ObjTerm {
     }
 
     public void addRule(Rule rule) {
+        if (rule == null) {
+            canBeEps = true;
+            return;
+        }
         rules.add(rule);
     }
 }

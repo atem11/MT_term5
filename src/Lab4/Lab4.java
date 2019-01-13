@@ -5,13 +5,17 @@ package Lab4;
 //java -jar ..\..\..\..\lib\antlr-4.7.1-complete.jar -o output Grammarv2.g4
 
 import Lab4.grammar.Grammar;
-import Lab4.grammar.generator.*;
+import Lab4.grammar.generator.ClassGenerator;
+import Lab4.grammar.generator.TokenGenerator;
 import Lab4.grammar.parser.output.Grammarv2Lexer;
 import Lab4.grammar.parser.output.Grammarv2Parser;
+import grammar.result.testGrammar.LexertestGrammar;
+import grammar.result.testGrammar.TokentestGrammar;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,7 +27,7 @@ public class Lab4 {
     public static void main(String[] args) throws IOException {
         Path pathToGrammarFile = Paths.get(".\\src\\Lab4\\testGrammar.txt");
         String pathToOutput = ".\\src";
-        Path pathToInputFile = Paths.get(".\\test.txt");
+        Path pathToInputFile = Paths.get(".\\src\\Lab4\\test.txt");
         //Parse to Grammar.class
         ANTLRInputStream reader = new ANTLRInputStream(Files.newInputStream(pathToGrammarFile));
         Grammarv2Lexer lexer = new Grammarv2Lexer(reader);
@@ -34,9 +38,25 @@ public class Lab4 {
         ClassGenerator tokenGenerator = new TokenGenerator(pathToOutput, grammar);
         tokenGenerator.generateClass();
         //Generate Lexer.class
-        ClassGenerator lexerGenerator = new LexerGenerator(pathToOutput, grammar);
-        lexerGenerator.generateClass();
+        /*ClassGenerator lexerGenerator = new LexerGenerator(pathToOutput, grammar);
+        lexerGenerator.generateClass();*/
 
-        System.out.println("NICE");
+        System.out.println("Finish");
+
+        //Test part
+        try (BufferedReader read = Files.newBufferedReader(pathToInputFile)) {
+            StringBuilder input = new StringBuilder();
+            String line;
+            while ((line = read.readLine()) != null) {
+                input.append(line);
+            }
+            LexertestGrammar lex = new LexertestGrammar(input.toString());
+            lex.nextToken();
+            while (lex.curToken() != TokentestGrammar.END_POINT) {
+                System.err.println(lex.curToken());
+                lex.nextToken();
+            }
+        }
+
     }
 }

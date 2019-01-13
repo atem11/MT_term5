@@ -33,6 +33,7 @@ nonterm_rule returns [NonTerm t]
 pattern returns [Rule r]
     :   { $r = new Rule(); }
         (one_pat { $r.addTerm($one_pat.t); } )+
+    | 'Eps' { $r = null; }
     ;
 
 one_pat returns [ObjTerm t]
