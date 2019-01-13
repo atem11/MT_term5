@@ -20,6 +20,11 @@ public class Term implements ObjTerm {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public String regexp() {
         return regexp;
     }

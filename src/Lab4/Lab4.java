@@ -7,16 +7,14 @@ package Lab4;
 import Lab4.grammar.Grammar;
 import Lab4.grammar.generator.ClassGenerator;
 import Lab4.grammar.generator.LexerGenerator;
+import Lab4.grammar.generator.ParserGenerator;
 import Lab4.grammar.generator.TokenGenerator;
 import Lab4.grammar.parser.output.Grammarv2Lexer;
 import Lab4.grammar.parser.output.Grammarv2Parser;
-import grammar.result.testGrammar.LexertestGrammar;
-import grammar.result.testGrammar.TokentestGrammar;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,16 +33,20 @@ public class Lab4 {
         TokenStream tokens = new CommonTokenStream(lexer);
         Grammarv2Parser parser = new Grammarv2Parser(tokens);
         Grammar grammar =  parser.start().g;
+        grammar.prepare();
         //Generate Token.class
         ClassGenerator tokenGenerator = new TokenGenerator(pathToOutput, grammar);
         tokenGenerator.generateClass();
         //Generate Lexer.class
         ClassGenerator lexerGenerator = new LexerGenerator(pathToOutput, grammar);
         lexerGenerator.generateClass();
+        //Generate Parser.class
+        ClassGenerator parserGenerator = new ParserGenerator(pathToOutput, grammar);
+        parserGenerator.generateClass();
 
         System.out.println("Finish");
 
-        //*Test part
+        /*Test part
         try (BufferedReader read = Files.newBufferedReader(pathToInputFile)) {
             StringBuilder input = new StringBuilder();
             String line;

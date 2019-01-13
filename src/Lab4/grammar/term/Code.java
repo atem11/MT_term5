@@ -13,6 +13,11 @@ public class Code implements ObjTerm {
         return "~code~";
     }
 
+    @Override
+    public String toString() {
+        return "code";
+    }
+
     public String code() {
         return code;
     }

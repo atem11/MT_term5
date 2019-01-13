@@ -3,9 +3,7 @@ package Lab4.grammar.term;
 import Lab4.grammar.rules.Rule;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class NonTerm implements ObjTerm {
 
@@ -16,8 +14,6 @@ public class NonTerm implements ObjTerm {
     private List<String> parameters = new ArrayList<>();
     private Boolean canBeEps = false;
 
-    private Set<Term> first = new HashSet<>();
-    private Set<Term> follow = new HashSet<>();
 
     public NonTerm(String name) {
         this.name = name;
@@ -40,11 +36,24 @@ public class NonTerm implements ObjTerm {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public void addRule(Rule rule) {
         if (rule == null) {
             canBeEps = true;
             return;
         }
         rules.add(rule);
+    }
+
+    public boolean isEps() {
+        return canBeEps;
+    }
+
+    public List<Rule> rules() {
+        return rules;
     }
 }

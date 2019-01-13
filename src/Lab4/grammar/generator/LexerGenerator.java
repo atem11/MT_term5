@@ -60,7 +60,7 @@ public class LexerGenerator extends ClassGenerator {
 
     private void printAddTerms() {
         printCodeLine(1, "private void addTerms() {");
-        printCodeLine(2, "tokenRegexp.put(", tokenName+".END_POINT, Pattern.compile(\"#\"));");
+        printCodeLine(2, "tokenRegexp.put(", tokenName+".END_POINT, Pattern.compile(\"__$__\"));");
         for (Term t : grammar.terms()) {
             printCodeLine(2, "tokenRegexp.put(", tokenName+"."+t.name(), ", Pattern.compile(", t.regexp(),"));");
         }
