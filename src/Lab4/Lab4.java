@@ -6,6 +6,7 @@ package Lab4;
 
 import Lab4.grammar.Grammar;
 import Lab4.grammar.generator.ClassGenerator;
+import Lab4.grammar.generator.LexerGenerator;
 import Lab4.grammar.generator.TokenGenerator;
 import Lab4.grammar.parser.output.Grammarv2Lexer;
 import Lab4.grammar.parser.output.Grammarv2Parser;
@@ -38,12 +39,12 @@ public class Lab4 {
         ClassGenerator tokenGenerator = new TokenGenerator(pathToOutput, grammar);
         tokenGenerator.generateClass();
         //Generate Lexer.class
-        /*ClassGenerator lexerGenerator = new LexerGenerator(pathToOutput, grammar);
-        lexerGenerator.generateClass();*/
+        ClassGenerator lexerGenerator = new LexerGenerator(pathToOutput, grammar);
+        lexerGenerator.generateClass();
 
         System.out.println("Finish");
 
-        //Test part
+        //*Test part
         try (BufferedReader read = Files.newBufferedReader(pathToInputFile)) {
             StringBuilder input = new StringBuilder();
             String line;
@@ -56,7 +57,7 @@ public class Lab4 {
                 System.err.println(lex.curToken());
                 lex.nextToken();
             }
-        }
+        }//*/
 
     }
 }
