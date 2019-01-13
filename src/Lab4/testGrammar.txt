@@ -1,0 +1,14 @@
+grammar testGrammar
+
+s : BRO s BRC ss
+  | Eps
+  ;
+
+ss: s ss
+  | Eps
+  ;
+
+BRO : "\(" ;
+BRC : "\)" ;
+Eps : "";
+WS -> "@";
