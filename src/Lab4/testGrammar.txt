@@ -4,36 +4,84 @@ grammar testGrammar
 import Lab2.parserLab2.Tree;
 }
 
-s   : nre nend
+s returns[t : Tree]  :
+    { $t = new Tree("S"); }
+    nre
+    { $t.addChildren(nre.t); }
+     nend
+    { $t.addChildren(nend.t); }
     ;
 
-nend: Eps
-    | s_
+nend returns[t : Tree]:
+        Eps { $t = new Tree("Nend"); }
+        |
+        { $t = new Tree("Nend"); }
+        s_
+        { $t.addChildren(s_.t); }
     ;
 
-s_  : OR nre nend
+s_  returns[t : Tree] :
+            { $t = new Tree("S'");  }
+            OR
+            { $t.addChildren(new Tree(OR)); }
+            nre
+            { $t.addChildren(nre.t); }
+            nend
+            { $t.addChildren(nend.t); }
     ;
 
-nre : os next
+nre returns[t : Tree] :
+                { $t = new Tree("Nre"); }
+                os
+                { $t.addChildren(os.t); }
+                next
+                { $t.addChildren(next.t); }
     ;
 
-next: Eps
-    | nre_
+next returns[t : Tree] :
+                Eps { $t = new Tree("Next"); }
+                | { $t = new Tree("Next"); }
+                nre_
+                { $t.addChildren(nre_.t); }
     ;
 
-nre_: os next
+nre_ returns[t : Tree] :
+                { $t = new Tree("Nre'"); }
+                os
+                { $t.addChildren(os.t); }
+                next
+                { $t.addChildren(next.t); }
     ;
 
-os  : re klini
+os returns[t : Tree] : { $t = new Tree("Os"); }
+                       re
+                       { $t.addChildren(re.t); }
+                       klini
+                       { $t.addChildren(klini.t); }
     ;
 
-klini:Z
-    | Q
-    | Eps
+klini returns[t : Tree] :
+    { $t = new Tree("Klini"); }
+    Z
+    { $t.addChildren(new Tree(Z)); }
+    |
+    { $t = new Tree("Klini"); }
+    Q
+    { $t.addChildren(new Tree(Q)); }
+    |  Eps { $t = new Tree("Klini"); }
     ;
 
-re  : LET
-    | BRO s BRC
+re returns[t : Tree] :
+        { $t = new Tree("RE"); }
+        LET
+        { $t.addChildren(new Tree(LET)); }
+    |   { $t = new Tree("RE"); }
+        BRO
+        { $t.addChildren(new Tree(BRO)); }
+        s
+        { $t.addChildren(s.t); }
+        BRC
+        { $t.addChildren(new Tree(BRC)); }
     ;
 
 BRO : "\\(" ;

@@ -40,7 +40,7 @@ public class ParserGenerator extends ClassGenerator {
     private void printRETvalues() {
         for (NonTerm term : grammar.nonTerms()) {
             if (term.getRet_args() != null) {
-                printCodeLine(1, "class", "RET" + term.name(), "{");
+                printCodeLine(1, "public class", "RET" + term.name(), "{");
                 for (Argument arg : term.getRet_args()) {
                     printCodeLine(2, "public", arg.getType(), arg.getName(), ";");
                 }
@@ -60,6 +60,7 @@ public class ParserGenerator extends ClassGenerator {
     private void printConstructor() {
         printCodeLine(1, "public", "Parser" + grammar.name(), "(", "Lexer" + grammar.name(), "lexer) {");
         printCodeLine(2, "this.lexer = lexer;");
+        printCodeLine(2, "this.lexer.nextToken();");
         printCodeLine(1, "}", EOL);
     }
 
@@ -133,7 +134,7 @@ public class ParserGenerator extends ClassGenerator {
                     printCodeLine(4, name, "= consume(lexer.curToken());");
                 } else {
                     String name = objTerm.name();
-                    if (((NonTerm) objTerm).getRet_args() != null) {
+                    if (grammar.getRetArg(objTerm) != null) {
                         if (!localVars.contains(name)) {
                             printCodeLine(4, "RET" + name);
                             localVars.add(name);
@@ -196,8 +197,10 @@ public class ParserGenerator extends ClassGenerator {
     private void printEndParse(NonTerm term) {
         printCodeLine(3, "default :");
         printCodeLine(4, "System.err.println(\"Unexpected Token:\" + lexer.curToken() );");
-        printCodeLine(4, "lexer.nextToken();");
         printCodeLine(2, "}");
+        if (term.getRet_args() != null) {
+            printCodeLine(2 , "return null;");
+        }
         printCodeLine(1, "}", EOL);
     }
 }

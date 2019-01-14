@@ -3,6 +3,7 @@ package Lab4;
 
 //java -jar ..\..\..\..\lib\antlr-4.7.1-complete.jar -o output Grammarv2.g4
 
+import Lab2.parserLab2.Tree;
 import Lab4.grammar.Grammar;
 import Lab4.grammar.generator.ClassGenerator;
 import Lab4.grammar.generator.LexerGenerator;
@@ -57,7 +58,8 @@ public class Lab4 {
             }
             LexertestGrammar lex = new LexertestGrammar(input.toString());
             ParsertestGrammar parsertestGrammar = new ParsertestGrammar(lex);
-            parsertestGrammar.s();
+            Tree tree = parsertestGrammar.s().t;
+            System.err.println(tree.toString());
         }//*/
 
     }

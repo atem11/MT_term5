@@ -1,6 +1,7 @@
 package Lab4.grammar;
 
 import Lab4.grammar.rules.Rule;
+import Lab4.grammar.term.Argument;
 import Lab4.grammar.term.NonTerm;
 import Lab4.grammar.term.ObjTerm;
 import Lab4.grammar.term.Term;
@@ -54,6 +55,16 @@ public class Grammar {
 
     public boolean hasImports() {
         return imports != null;
+    }
+
+    public List<Argument> getRetArg(ObjTerm term) {
+        NonTerm t = (NonTerm) term;
+        for (NonTerm tt : nonTerms) {
+            if (tt.name().equals(t.name())) {
+                return tt.getRet_args();
+            }
+        }
+        return null;
     }
 
     public String imports() {
