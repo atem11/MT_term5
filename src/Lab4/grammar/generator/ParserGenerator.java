@@ -124,7 +124,8 @@ public class ParserGenerator extends ClassGenerator {
             Set<String> localVars = new HashSet<>();
             rule.rule().forEach(objTerm -> {
                 if (objTerm instanceof Code) {
-                    printCodeLine(4, ((Code) objTerm).code().replaceAll("\\$", "retArg."));
+                    String code = ((Code) objTerm).code().replaceAll("\\$", "retArg.");
+                    printCodeLine(4, code.substring(1, code.length() - 1));
                 } else if (objTerm instanceof Term) {
                     String name = objTerm.name();
                     if (!localVars.contains(name)) {

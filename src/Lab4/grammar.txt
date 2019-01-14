@@ -1,0 +1,50 @@
+grammar test2
+
+
+lowOp returns[val : int]
+    : hiOp lowOp_({hiOp.val})
+      { $val = lowOp_.val; }
+    ;
+
+lowOp_ (prev : int) returns[val : int]
+    : ADD hiOp
+      { int N = prev + hiOp.val; }
+      lowOp_(N)
+      { $val = lowOp_.val; }
+    | SUB hiOp
+      { int N = prev - hiOp.val; }
+      lowOp_(N)
+      { $val = lowOp_.val; }
+    | Eps
+      { $val = prev; }
+    ;
+
+hiOp returns[val : int]
+    : unar hiOp_({unar.val})
+          { $val = hiOp_.val; }
+    ;
+
+hiOp_(prev : int) returns [val : int]
+    : MUL unar hiOp_({prev * unar.val})
+      { $val = hiOp_.val;}
+    | DIV unar hiOp_({prev / unar.val})
+      { $val = hiOp_.val;}
+    | Eps { $val = prev; }
+    ;
+
+unar returns[val : int]
+    : BRO lowOp BRC
+      { $val = lowOp.val; }
+    | NUM
+      { $val = Integer.valueOf(NUM); }
+    ;
+
+WS -> "[ \n\t\r]+" ;
+
+BRO : "\\(" ;
+BRC : "\\)" ;
+NUM : "[0-9]+" ;
+ADD : "\\+" ;
+SUB : "-" ;
+MUL : "\\*" ;
+DIV : "\\\\" ;
