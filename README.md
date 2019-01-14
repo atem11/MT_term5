@@ -34,7 +34,8 @@
 > 2. Генераторы классов `grammar\genegator`
 > 3. Структура грамматики `grammar\term`
 > 4. Исполняемы класс `Lab4.class`
-
+>       * Класс принимает 2 или 3 агрумента. Первый - это путь до файла с грамматикой. Второй - это директория для output. Третий - это путь до файла со входными данными.
+> 5. [Готовые парсеры][5]
 
 [1]: https://neerc.ifmo.ru/~sta/2018-2019/3-parsing/
 
@@ -46,3 +47,5 @@
 
 [4]: https://neerc.ifmo.ru/~sta/2018-2019/3-parsing/lab4.html
 [41]: https://github.com/atem11/MT_term5/tree/master/src/Lab4
+
+[5]: https://github.com/atem11/MT_term5/tree/master/src/grammar/result
