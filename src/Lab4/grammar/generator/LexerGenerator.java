@@ -31,6 +31,7 @@ public class LexerGenerator extends ClassGenerator {
         printHasToken();
         printNextToken();
         printCurToken();
+        printCurStr();
         printCodeLine(0, "}");
     }
 
@@ -60,7 +61,7 @@ public class LexerGenerator extends ClassGenerator {
 
     private void printAddTerms() {
         printCodeLine(1, "private void addTerms() {");
-        printCodeLine(2, "tokenRegexp.put(", tokenName+".END_POINT, Pattern.compile(\"__$__\"));");
+        printCodeLine(2, "tokenRegexp.put(", tokenName+".END_POINT, Pattern.compile(\"__\\\\$__\"));");
         for (Term t : grammar.terms()) {
             printCodeLine(2, "tokenRegexp.put(", tokenName+"."+t.name(), ", Pattern.compile(", t.regexp(),"));");
         }
@@ -112,8 +113,14 @@ public class LexerGenerator extends ClassGenerator {
     }
 
     private void printCurToken() {
-        printCodeLine(1, "public TokentestGrammar curToken() {");
+        printCodeLine(1, "public", tokenName, "curToken() {");
         printCodeLine(2, "return token;");
+        printCodeLine(1, "}", EOL);
+    }
+
+    private void printCurStr() {
+        printCodeLine(1, "public", "String", "curStr() {");
+        printCodeLine(2, "return matcher.group();");
         printCodeLine(1, "}");
     }
 }

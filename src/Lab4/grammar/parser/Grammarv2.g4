@@ -13,8 +13,15 @@ import Lab4.grammar.term.*;
 
 start returns [Grammar g]
     : 'grammar' NONTERM_NAME    { $g = new Grammar($NONTERM_NAME.text); }
+        imports?    { $g.addImports($imports.imp); }
         (rules[$g] ';')+        {  }
     ;
+
+imports returns [String imp]
+    : '@import' CODE    { $imp = $CODE.text; }
+    | { $imp = null; }
+    ;
+
 
 rules [Grammar g]
     : TERM_NAME ':' STRING  { $g.addTerm(new Term($TERM_NAME.text, $STRING.text)); }
@@ -25,7 +32,8 @@ rules [Grammar g]
 nonterm_rule returns [NonTerm t]
     : NONTERM_NAME          { $t = new NonTerm($NONTERM_NAME.text); }
         args?               { $t.addArgs($args.a); }
-        ret_arg? ':'        { $t.addRetArgs($ret_arg.a); }
+        ret_arg?            { $t.addRetArgs($ret_arg.a); }
+        ':'
         pattern             { $t.addRule($pattern.r); }
         ( '|' pattern       { $t.addRule($pattern.r); } )*
     ;
@@ -33,7 +41,8 @@ nonterm_rule returns [NonTerm t]
 pattern returns [Rule r]
     :   { $r = new Rule(); }
         (one_pat { $r.addTerm($one_pat.t); } )+
-    | 'Eps' { $r = null; }
+    |   { $r = new Rule(); }
+        'Eps' (CODE  { $r.addTerm(new Code($CODE.text)); })?
     ;
 
 one_pat returns [ObjTerm t]

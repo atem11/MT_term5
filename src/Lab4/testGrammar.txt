@@ -1,13 +1,44 @@
 grammar testGrammar
 
-s : BRO s BRC ss
-  | Eps
-  ;
+@import {
+import Lab2.parserLab2.Tree;
+}
 
-ss: s ss
-  | Eps
-  ;
+s   : nre nend
+    ;
+
+nend: Eps
+    | s_
+    ;
+
+s_  : OR nre nend
+    ;
+
+nre : os next
+    ;
+
+next: Eps
+    | nre_
+    ;
+
+nre_: os next
+    ;
+
+os  : re klini
+    ;
+
+klini:Z
+    | Q
+    | Eps
+    ;
+
+re  : LET
+    | BRO s BRC
+    ;
 
 BRO : "\\(" ;
 BRC : "\\)" ;
-WS -> "@";
+OR  : "\\|" ;
+Q   : "\\?" ;
+Z   : "\\*" ;
+LET : "[a-z]+" ;

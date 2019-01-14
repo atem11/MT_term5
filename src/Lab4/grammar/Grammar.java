@@ -14,6 +14,7 @@ public class Grammar {
     private List<Term> terms = new ArrayList<>();
     private String name;
     private String whiteSpaces = null;
+    private String imports = null;
 
     public Grammar(String name) {
         this.name = name;
@@ -47,9 +48,29 @@ public class Grammar {
         return nonTerms;
     }
 
+    public void addImports(String imports) {
+        this.imports = imports;
+    }
+
+    public boolean hasImports() {
+        return imports != null;
+    }
+
+    public String imports() {
+        return imports.substring(1, imports.length() - 1);
+    }
+
     public void prepare() {
         searchFirst();
         searchFollow();
+    }
+
+    public Set<String> getFirst(NonTerm term) {
+        return first.get(term.name());
+    }
+
+    public Set<String> getFollow(NonTerm term) {
+        return follow.get(term.name());
     }
 
     //Generator part
@@ -57,7 +78,7 @@ public class Grammar {
     private Map<String, Set<String>> follow = new HashMap<>();
     private final String EPS = "__Eps__";
 
-    private Set<String> findFirst(List<ObjTerm> seq) {
+    public Set<String> findFirst(List<ObjTerm> seq) {
         Set<String> ans = new HashSet<>();
         if (seq.size() >= 1 && seq.get(0) instanceof Term) {
             ans.add(seq.get(0).name());
@@ -128,16 +149,20 @@ public class Grammar {
             follow.put(nt.name(), new HashSet<>());
         }
 
-        follow.get(nonTerms.get(0).name()).add("__$__");
+        follow.get(nonTerms.get(0).name()).add("END_POINT");
 
         while (true) {
-            Map<String, Set<String>> prevFollow = new HashMap<>(follow);
+            Map<String, Set<String>> prevFollow = new HashMap<>();
+            follow.forEach((name, set) -> prevFollow.put(name, new HashSet<>(set)));
             for (NonTerm nt : nonTerms) {
 
                 for (Rule r : nt.rules()) {
                     List<ObjTerm> clearRule = r.rule()
                             .filter(t -> t instanceof NonTerm || t instanceof Term)
                             .collect(Collectors.toList());
+                    if (clearRule.size() == 0) {
+                        continue;
+                    }
                     for (int i = 0; i < clearRule.size() - 1; i++) {
                         if (clearRule.get(i) instanceof NonTerm) {
                             NonTerm t = (NonTerm) clearRule.get(i);

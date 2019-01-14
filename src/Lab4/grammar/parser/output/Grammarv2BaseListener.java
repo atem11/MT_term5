@@ -33,6 +33,18 @@ public class Grammarv2BaseListener implements Grammarv2Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterImports(Grammarv2Parser.ImportsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitImports(Grammarv2Parser.ImportsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRules(Grammarv2Parser.RulesContext ctx) { }
 	/**
 	 * {@inheritDoc}

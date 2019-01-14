@@ -4,6 +4,7 @@ import Lab4.grammar.rules.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NonTerm implements ObjTerm {
 
@@ -11,7 +12,7 @@ public class NonTerm implements ObjTerm {
     private List<Rule> rules = new ArrayList<>();
     private List<Argument> args;
     private List<Argument> ret_args;
-    private List<String> parameters = new ArrayList<>();
+    private List<String> parameters = null;
     private Boolean canBeEps = false;
 
 
@@ -42,9 +43,12 @@ public class NonTerm implements ObjTerm {
     }
 
     public void addRule(Rule rule) {
-        if (rule == null) {
+        List<ObjTerm> r = rule.rule().collect(Collectors.toList());
+        if (r.size() == 1 && r.get(0) instanceof Code) {
             canBeEps = true;
-            return;
+        }
+        if (r.size() == 0) {
+            canBeEps = true;
         }
         rules.add(rule);
     }
@@ -55,5 +59,17 @@ public class NonTerm implements ObjTerm {
 
     public List<Rule> rules() {
         return rules;
+    }
+
+    public List<Argument> getRet_args() {
+        return ret_args;
+    }
+
+    public List<Argument> getArgs() {
+        return args;
+    }
+
+    public List<String> getParameters() {
+        return parameters;
     }
 }
